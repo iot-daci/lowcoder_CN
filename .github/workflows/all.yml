@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - 'master'
+      - 'main'
+      - 'feature-*'
+      - 'lowcoder_CN'
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    uses: iot-daci/template/.github/workflows/docker.yml@main
+    with:
+      workdir: .
+      docker_context: .
+      docker_file: deploy/docker/Dockerfile
+      docker_image: lowcoder-ce
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
